@@ -13,7 +13,7 @@ class LoginPage extends Component {
    render() {
       return (
          <Fragment>
-            <LoginFrom />
+            <LoginFrom { ...this.props } />
          </Fragment>
       )
    }

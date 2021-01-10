@@ -1,5 +1,7 @@
 // IMPORT COMPONENTS
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import {
    Grid,
    Card,
@@ -7,6 +9,14 @@ import {
    Typography,
    Button
 } from '@material-ui/core'
+
+// IMPORT ACTION CREATORS
+import {
+   SetLoading,
+   SetNotification,
+   SetUserData,
+   SetLoggedIn
+} from '../../store/system/actions'
 
 // IMPORT UTILS
 import axios from '../../utils/axios'
@@ -20,6 +30,11 @@ class LoginForm extends Component {
          target: 'login',
          form: {}
       }
+   }
+
+   // COMPONENT LIFECYCLE METHODS
+   componentDidMount() {
+      this.ValidateToken()
    }
 
    // COMPONENT METHODS
@@ -46,6 +61,7 @@ class LoginForm extends Component {
 
    SubmitForm = async () => {
       if (this.ValidateForm()) {
+         await this.props.SetLoading(true)
          try {
             let route = ''
             if (this.state.target === 'login') {
@@ -56,29 +72,66 @@ class LoginForm extends Component {
             const res = await axios.post(route, {
                ...this.state.form
             })
-            console.log(res)
+            sessionStorage.setItem('UserToken', res.data)
+            this.ValidateToken()
          } catch (error) {
-
+            this.props.SetNotification({
+               show: true,
+               message: 'Ha ocurrido un error, por favor intenta de  nuevo'
+            })
          }
+         await this.props.SetLoading(true)
       }
    }
 
    ValidateForm = () => {
       const { fullname, email, password } = this.state.form
       let valid = true
+      let message = ''
       if (this.state.target === 'signup' && !fullname) {
          valid = false
+         message = 'Por favor ingresa tu nombre'
       }
       if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
          valid = false
+         message = 'Formato de correo incorrecto'
       }
-      if (password.length < 7) {
+      if (!password || password.length < 7) {
          valid = false
+         message = 'Tu contraseña debe tener mínimo 7 caracteres'
       }
       if (!/[\d]{1}/g.test(password)) {
          valid = false
+         message = 'Tu contraseña debe tener mínimo un número'
+      }
+      if (!valid) {
+         this.props.SetNotification({
+            show: true,
+            message
+         })
       }
       return valid
+   }
+
+   ValidateToken = async () => {
+      const token = sessionStorage.getItem('UserToken')
+      if (token) {
+         try {
+            const res = await axios.get('/user/data', {
+               headers: {
+                  authorization: `Bearer ${token}`
+               }
+            })
+            await this.props.SetUserData(res.data)
+            await this.props.SetLoggedIn(true)
+            this.props.history.push('/inicio')
+         } catch (error) {
+            this.props.SetNotification({
+               show: true,
+               message: 'Ha ocurrido un error, por favor intenta de  nuevo'
+            })
+         }
+      }
    }
 
    // COMPONENT RENDERS
@@ -168,5 +221,18 @@ class LoginForm extends Component {
    }
 }
 
+// STORE MAPPERS
+const mapDispatchToProps = dispatch => ({
+   ...bindActionCreators(
+      {
+         SetLoading,
+         SetNotification,
+         SetUserData,
+         SetLoggedIn
+      },
+      dispatch
+   )
+})
+
 // EXPORT COMPONENT
-export default LoginForm
+export default connect(null, mapDispatchToProps)(LoginForm)
