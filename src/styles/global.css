@@ -27,3 +27,22 @@ html, body {
 .progress {
    margin: 50px;
 }
+
+.drawer {
+   width: 250px !important;
+   background-color: #424242 !important;
+}
+
+.logo-container {
+   display: flex;
+   justify-content: center;
+}
+
+.logo-container img {
+   width: 200px;
+   height: auto;
+}
+
+.nav-button {
+   color: white !important;
+}

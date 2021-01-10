@@ -9,6 +9,7 @@ import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
 
 // IMPORT LAYOUT COMPONENTS
+import Layout from './components/layout/Layout'
 import Loading from './components/layout/Loading'
 import Notification from './components/layout/Notification'
 
@@ -29,7 +30,8 @@ ReactDOM.render(
         <Fragment>
           <Route path="/" component={ Loading } />
           <Route path="/" component={ Notification } />
-          <Route path="/" exact component={ HomePage } />
+          <Route path="/" component={ Layout } />
+          <Route path="/inicio" exact component={ HomePage } />
           <Route path="/login" exact component={ LoginPage } />
         </Fragment>
       </Router>
