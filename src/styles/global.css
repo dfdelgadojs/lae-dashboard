@@ -1,0 +1,25 @@
+html, body {
+   margin: 0 !important;
+   padding: 0 !important;
+}
+
+.card-padding {
+   padding-left: 20px;
+   padding-right: 20px;
+}
+ 
+ .grid-margin {
+   margin-bottom: 20px !important;
+}
+
+.card-title {
+   display: flex;
+   justify-content: center;
+   padding: 12px;
+}
+
+.card-title p {
+   color: #1565C0;
+   font-size: 1.2em;
+   text-transform: uppercase;
+}
