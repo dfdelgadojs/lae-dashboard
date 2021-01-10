@@ -1,5 +1,5 @@
 // IMPORT COMPONENTS
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import {
    Grid,
    Card,
@@ -8,16 +8,21 @@ import {
    Button
 } from '@material-ui/core'
 
+// IMPORT UTILS
+import axios from '../../utils/axios'
+
 // COMPONENT DEFINITION
 class LoginForm extends Component {
    // COMPONENT CONSTRUCTOR
    constructor(props) {
       super(props)
       this.state = {
-         target: 'login'
+         target: 'login',
+         form: {}
       }
    }
 
+   // COMPONENT METHODS
    SwitchTarget = () => {
       let newTarget = ''
       if (this.state.target === 'login') {
@@ -28,6 +33,39 @@ class LoginForm extends Component {
       this.setState({
          target: newTarget
       })
+   }
+
+   UpdateFormData = (target, value) => {
+      this.setState({
+         form: {
+            ...this.state.form,
+            [target]: value
+         }
+      })
+   }
+
+   SubmitForm = () => {
+      if (this.ValidateForm()) {
+         axios.post('/user/login', { ...this.form })
+      }
+   }
+
+   ValidateForm = () => {
+      const { fullname, email, password } = this.state.form
+      let valid = true
+      if (this.state.target === 'signup' && !fullname) {
+         valid = false
+      }
+      if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+         valid = false
+      }
+      if (password.length < 7) {
+         valid = false
+      }
+      if (!/[\d]{1}/g.test(password)) {
+         valid = false
+      }
+      return valid
    }
 
    // COMPONENT RENDERS
@@ -54,6 +92,9 @@ class LoginForm extends Component {
                               label="Nombre Completo"
                               variant="outlined"
                               fullWidth
+                              onChange={
+                                 (event) => this.UpdateFormData('fullname', event.target.value)
+                              }
                            />
                         </Grid>
                      }
@@ -62,6 +103,9 @@ class LoginForm extends Component {
                            label="Correo Electrónico"
                            variant="outlined"
                            fullWidth
+                           onChange={
+                              (event) => this.UpdateFormData('email', event.target.value)
+                           }
                         />
                      </Grid>
                      <Grid className="grid-margin" item xs={12}>
@@ -70,10 +114,18 @@ class LoginForm extends Component {
                            variant="outlined"
                            type="password"
                            fullWidth
+                           onChange={
+                              (event) => this.UpdateFormData('password', event.target.value)
+                           }
                         />
                      </Grid>
                      <Grid className="grid-margin" item xs={12}>
-                        <Button color="primary" variant="contained" fullWidth>
+                        <Button
+                           color="primary"
+                           variant="contained"
+                           fullWidth
+                           onClick={ this.SubmitForm }
+                        >
                            {
                               this.state.target === 'login'
                                  ? 'Ingresar'
