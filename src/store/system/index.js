@@ -1,13 +1,19 @@
 // IMPORT CONSTANTS
-import { SET_LOADING, SET_NOTIFICATION } from './constants'
+import {
+   SET_LOADING,
+   SET_NOTIFICATION,
+   SET_USER_DATA,
+   SET_LOGGED_IN
+} from './constants'
 
 // SET INITIAL STATE
 const initialState = {
    loading: false,
+   loggedIn: false,
+   user: {},
    notification: {
       show: false,
-      message: '',
-      type: ''
+      message: ''
    }
 }
 
@@ -20,6 +26,12 @@ const SystemReducer = (state = initialState, action) => {
          return newState
       case SET_NOTIFICATION:
          newState.notification = { ...payload }
+         return newState
+      case SET_USER_DATA:
+         newState.user = { ...payload }
+         return newState
+      case SET_LOGGED_IN:
+         newState.loggedIn = payload
          return newState
       default:
          return newState

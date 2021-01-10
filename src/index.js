@@ -6,9 +6,17 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 
 // IMPORT PAGE COMPONENTS
 import HomePage from './pages/Home'
+import LoginPage from './pages/Login'
+
+// IMPORT LAYOUT COMPONENTS
+import Loading from './components/layout/Loading'
+import Notification from './components/layout/Notification'
 
 // IMPORT BOOTSTRAP STORE
 import BootstrapStore from './store/index'
+
+// IMPORT STYLES
+import './styles/global.css'
 
 // CREATE STORE INSTANCE
 const store = BootstrapStore()
@@ -19,7 +27,10 @@ ReactDOM.render(
     <Provider store = { store }>
       <Router>
         <Fragment>
+          <Route path="/" component={ Loading } />
+          <Route path="/" component={ Notification } />
           <Route path="/" exact component={ HomePage } />
+          <Route path="/login" exact component={ LoginPage } />
         </Fragment>
       </Router>
     </Provider>
