@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 // IMPORT PAGE COMPONENTS
 import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
+import UsersPage from './pages/Users'
 
 // IMPORT LAYOUT COMPONENTS
 import Layout from './components/layout/Layout'
@@ -32,6 +33,7 @@ ReactDOM.render(
           <Route path="/" component={ Notification } />
           <Route path="/" component={ Layout } />
           <Route path="/inicio" exact component={ HomePage } />
+          <Route path="/usuarios" exact component={ UsersPage } />
           <Route path="/login" exact component={ LoginPage } />
         </Fragment>
       </Router>

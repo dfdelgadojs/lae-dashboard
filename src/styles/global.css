@@ -84,3 +84,8 @@ html, body {
 .nav-icon {
    margin-right: 15px;
 }
+
+.route-padding {
+   padding-left: 280px;
+   padding-top: 20px;
+}

@@ -1,9 +1,12 @@
 // IMPORT LIBRARIES
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
+// IMPORT COMPONENTS
+import UsersList from '../components/users/UsersList'
+
 // COMPONENT DEFINITION
-class HomePage extends Component {
+class UsersPage extends Component {
    // COMPONENT LIFECYCLE METHODS
    componentDidMount() {
       if (!this.props.store.system.loggedIn) {
@@ -14,8 +17,8 @@ class HomePage extends Component {
    // COMPONENT RENDERS
    render() {
       return (
-         <div>
-            HomePage
+         <div className="route-padding">
+            <UsersList />
          </div>
       )
    }
@@ -27,4 +30,4 @@ const mapStateToProps = state => ({
  })
 
 // EXPORT COMPONENT
-export default connect(mapStateToProps, null)(HomePage)
+export default connect(mapStateToProps, null)(UsersPage)
