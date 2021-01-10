@@ -122,6 +122,7 @@ class LoginForm extends Component {
                   authorization: `Bearer ${token}`
                }
             })
+            console.log(res.data)
             await this.props.SetUserData(res.data)
             await this.props.SetLoggedIn(true)
             this.props.history.push('/inicio')

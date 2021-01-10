@@ -18,6 +18,7 @@ class Loading extends Component {
    }
 }
 
+// MAPPERS
  const mapStateToProps = state => ({
    store: state
  })
