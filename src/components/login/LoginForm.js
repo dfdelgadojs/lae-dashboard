@@ -44,9 +44,22 @@ class LoginForm extends Component {
       })
    }
 
-   SubmitForm = () => {
+   SubmitForm = async () => {
       if (this.ValidateForm()) {
-         axios.post('/user/login', { ...this.form })
+         try {
+            let route = ''
+            if (this.state.target === 'login') {
+               route = '/user/login'
+            } else {
+               route = '/user/signup'
+            }
+            const res = await axios.post(route, {
+               ...this.state.form
+            })
+            console.log(res)
+         } catch (error) {
+
+         }
       }
    }
 
