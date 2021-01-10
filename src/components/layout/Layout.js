@@ -29,7 +29,7 @@ class Layout extends Component {
                      <Grid container>
                         <Grid className="breadcrumb" item xs={6}>
                            <Typography variant="h5">
-                              Inicio
+                              { this.props.store.system.page }
                            </Typography>
                         </Grid>
                         <Grid className="user-app-name" item xs={6}>
@@ -45,6 +45,11 @@ class Layout extends Component {
                               color="#424242"
                               icon={ faBell }
                            />
+                           <Typography className="button-margin" color="primary">
+                              {
+                                 `(${this.props.store.system.tasks})`
+                              }
+                           </Typography>
                            <Typography color="primary">
                               {
                                  this.props.store.system.user.fullname

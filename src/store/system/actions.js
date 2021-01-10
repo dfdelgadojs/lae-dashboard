@@ -3,7 +3,9 @@ import {
    SET_LOADING,
    SET_NOTIFICATION,
    SET_USER_DATA,
-   SET_LOGGED_IN
+   SET_LOGGED_IN,
+   SET_TASKS,
+   SET_PAGE
 } from './constants'
 
 // EXPORT ACTIONS
@@ -31,6 +33,20 @@ export const SetUserData = (payload) => {
 export const SetLoggedIn = (payload) => {
    return {
       type: SET_LOGGED_IN,
+      payload
+   }
+}
+
+export const SetTasks = (payload) => {
+   return {
+      type: SET_TASKS,
+      payload
+   }
+}
+
+export const SetPage = (payload) => {
+   return {
+      type: SET_PAGE,
       payload
    }
 }

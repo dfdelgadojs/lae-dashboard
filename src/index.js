@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import HomePage from './pages/Home'
 import LoginPage from './pages/Login'
 import UsersPage from './pages/Users'
+import TasksPage from './pages/Tasks'
+import RootHome from './pages/RootHome'
 
 // IMPORT LAYOUT COMPONENTS
 import Layout from './components/layout/Layout'
@@ -32,8 +34,10 @@ ReactDOM.render(
           <Route path="/" component={ Loading } />
           <Route path="/" component={ Notification } />
           <Route path="/" component={ Layout } />
+          <Route path="/" exact component={ RootHome } />
           <Route path="/inicio" exact component={ HomePage } />
           <Route path="/usuarios" exact component={ UsersPage } />
+          <Route path="/tareas" exact component={ TasksPage } />
           <Route path="/login" exact component={ LoginPage } />
         </Fragment>
       </Router>

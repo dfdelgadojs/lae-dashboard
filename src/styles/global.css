@@ -89,3 +89,21 @@ html, body {
    padding-left: 280px;
    padding-top: 20px;
 }
+
+.task-container {
+   padding: 15px;
+}
+
+.button-margin {
+   margin-right: 15px !important;
+}
+
+.justify-center {
+   display: flex;
+   justify-content: center;
+}
+
+.home-image {
+   width: 100%;
+   height: auto;
+}

@@ -4,13 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // IMPORT COMPONENTS
-import {
-   Grid,
-   Typography
-} from '@material-ui/core'
-
-// IMPORT IMAGES
-import image from '../static/login.jpg'
+import ToDoTasks from '../components/tasks/ToDoTasks'
 
 // ACTION CREATORS
 import {
@@ -18,31 +12,20 @@ import {
 } from '../store/system/actions'
 
 // COMPONENT DEFINITION
-class HomePage extends Component {
+class TasksPage extends Component {
    // COMPONENT LIFECYCLE METHODS
    componentDidMount() {
       if (!this.props.store.system.loggedIn) {
          this.props.history.push('/login')
       }
-      this.props.SetPage('Inicio')
+      this.props.SetPage('Tareas')
    }
 
    // COMPONENT RENDERS
    render() {
       return (
          <div className="route-padding">
-            <Grid container>
-               <Grid className="justify-center" item xs={12}>
-                  <Typography variant="h4">
-                     {
-                        `Bienvenido ${this.props.store.system.user.fullname}`
-                     }
-                  </Typography>
-               </Grid>
-               <Grid item xs={12}>
-                  <img className="home-image" src={image} />
-               </Grid>
-            </Grid>
+            <ToDoTasks />
          </div>
       )
    }
@@ -63,4 +46,4 @@ const mapStateToProps = state => ({
  })
 
 // EXPORT COMPONENT
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps, mapDispatchToProps)(TasksPage)

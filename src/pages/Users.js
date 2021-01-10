@@ -1,9 +1,15 @@
 // IMPORT LIBRARIES
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 // IMPORT COMPONENTS
 import UsersList from '../components/users/UsersList'
+
+// ACTION CREATORS
+import {
+   SetPage
+} from '../store/system/actions'
 
 // COMPONENT DEFINITION
 class UsersPage extends Component {
@@ -12,6 +18,7 @@ class UsersPage extends Component {
       if (!this.props.store.system.loggedIn) {
          this.props.history.push('/login')
       }
+      this.props.SetPage('Usuarios')
    }
 
    // COMPONENT RENDERS
@@ -25,9 +32,18 @@ class UsersPage extends Component {
 }
 
 // MAPPERS
+const mapDispatchToProps = dispatch => ({
+   ...bindActionCreators(
+      {
+         SetPage
+      },
+      dispatch
+   )
+})
+
 const mapStateToProps = state => ({
    store: state
  })
 
 // EXPORT COMPONENT
-export default connect(mapStateToProps, null)(UsersPage)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersPage)
