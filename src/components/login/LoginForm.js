@@ -122,7 +122,7 @@ class LoginForm extends Component {
                   authorization: `Bearer ${token}`
                }
             })
-            console.log(res.data)
+            await this.props.SetLoading(false)
             await this.props.SetUserData(res.data)
             await this.props.SetLoggedIn(true)
             this.props.history.push('/inicio')
@@ -132,6 +132,7 @@ class LoginForm extends Component {
                message: 'Ha ocurrido un error, por favor intenta de  nuevo'
             })
          }
+         await this.props.SetLoading(false)
       }
    }
 
