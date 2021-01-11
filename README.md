@@ -4,7 +4,7 @@ Este repositorio aloja el código del frontend, realizado con React (con create 
 Para ejecutar la aplicación se debe clonar el código fuente, se ingresa a la carpeta root del proyecto y se ejecuta los siguientes comandos:
 
 Nota:
-   1. como pre requisito por favor instalar yarn (https://classic.yarnpkg.com/en/docs/install/)
+   1. como pre requisito por favor instalar yarn (https://classic.yarnpkg.com/en/docs/install/) y node v15.5
    2. ejecutar tambien el proyecto del servidor, que adjunto al correo de esta prueba técnica
 
    1. "yarn install"
